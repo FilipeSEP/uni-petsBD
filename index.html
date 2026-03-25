@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="UNIPETS - Loja especializada em produtos de alta qualidade para seu pet. Rações, brinquedos, acessórios e muito mais.">
+    <meta name="keywords" content="pets, ração, animais, cães, gatos, pet shop">
+    <meta name="author" content="UNIPETS">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <title>UNIPETS - Loja de Produtos para Pets</title>
+</head>
+
+<body>
+    <header class="header" role="banner">
+        <div class="header-container">
+            <a href="#" class="logo" aria-label="UNIPETS - Página inicial">
+                <img width="220" height="150" src="https://filipesep.github.io/loja-pet/img/uni.pets.png"
+                    alt="UNIPETS - Loja para pets">
+            </a>
+
+            <nav class="navbar" role="navigation" aria-label="Menu principal">
+                <a href="#home">HOME</a>
+                <a href="#about">SOBRE</a>
+                <a href="#menu">PRODUTOS</a>
+                <a href="#contact">CONTATOS</a>
+            </nav>
+
+            <div class="header-actions">
+                <button class="search-btn" id="search-btn" aria-label="Pesquisar">
+                    <img width="32" height="32" src="https://img.icons8.com/ios-filled/50/search--v1.png"
+                        alt="Pesquisar" />
+                </button>
+                <input type="text" id="search-input" placeholder="Buscar produtos..."
+                    style="display:none; padding:8px; font-size:14px; border-radius:5px;">
+
+                <button class="cart-btn" id="cart-icon" aria-label="Carrinho de compras">
+                    <img width="32" height="32" src="https://img.icons8.com/pastel-glyph/64/shopping-cart--v2.png"
+                        alt="Carrinho de compras" />
+                    <span id="cart-counter" aria-live="polite">0</span>
+                </button>
+
+                <div id="register-modal" class="modal">
+                    <div class="modal-content">
+                        <span class="close" id="close-register">&times;</span>
+                        <h2>Criar Conta</h2>
+                        <form id="register-form">
+                            <div class="form-group">
+                                <label>Nome:</label>
+                                <input type="text" id="reg-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Email:</label>
+                                <input type="email" id="reg-email" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Senha:</label>
+                                <input type="password" id="reg-password" required>
+                            </div>
+                            <button type="submit" class="btn-primary">Cadastrar</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="user-menu">
+                    <button class="user-btn" id="user-icon" aria-label="Área do usuário">
+                        <div class="user-info">
+                            <div class="user-avatar" id="user-avatar">V</div>
+                            <span class="user-name" id="user-name">Visitante</span>
+                        </div>
+                    </button>
+                    <div class="user-dropdown" id="user-dropdown">
+                        <span class="user-greeting" id="user-greeting">Olá, Visitante!</span>
+                        <button id="login-btn" class="btn-primary">Fazer Login</button>
+                        <button id="cadastro-btn" class="btn-secondary">Criar Conta</button>
+                        <button id="my-orders-btn" style="display: none;">Meus Pedidos</button>
+                        <button id="my-addresses-btn" style="display: none;">Meus Endereços</button>
+                        <button id="logout-btn" style="display: none;" class="btn-secondary">Sair da Conta</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main role="main">
+        <section id="home" class="home-container" aria-labelledby="home-heading">
+            <div class="content">
+                <h1 id="home-heading">Bem-vindo à UNIPETS</h1>
+                <p>Seu melhor amigo merece o melhor, e é por isso que a UNIPETS existe. Mais do que um site de vendas,
+                    somos um refúgio para tutores exigentes que buscam apenas produtos da mais alta qualidade. Nossa
+                    curadoria é feita por quem entende e vive o mundo pet: só vendemos o que daríamos aos nossos
+                    próprios filhos de patas. Encontre rações, brinquedos, acessórios e mimos selecionados com carinho,
+                    garantia de saúde e muita diversão.</p>
+                <a href="#menu" class="btn">Encontrar itens</a>
+            </div>
+        </section>
+
+        <section class="about" id="about" aria-labelledby="about-heading">
+            <h2 id="about-heading" class="title">Sobre <span>Nós</span></h2>
+            <div class="row">
+                <div class="container-image">
+                    <img height="520" width="500" src="https://filipesep.github.io/loja-pet/img/thor2.png"
+                        alt="Nosso mascote Thor">
+                </div>
+                <div class="content">
+                    <h3>O Que Faz Nossa Loja Especial</h3>
+                    <p>Nossa missão é mais do que vender produtos: é garantir que todos os 'filhos de patas' tenham
+                        acesso ao que há de melhor para uma vida longa, saudável e feliz, e apoiar os tutores nessa jornada.</p>
+                    <a href="#about-details" class="btn">Saiba Mais</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="menu" id="menu" aria-labelledby="products-heading">
+            <h2 id="products-heading" class="title">Produtos</h2>
+            <div class="box-container">
+                <!-- Produtos serão carregados dinamicamente pelo JavaScript -->
+                <div class="loading">Carregando produtos...</div>
+            </div>
+        </section>
+
+        <section class="review" id="review" aria-labelledby="reviews-heading">
+            <h2 id="reviews-heading" class="title">Nossos <span>Clientes</span></h2>
+            <div class="box-container">
+                <article class="box">
+                    <img src="https://filipesep.github.io/loja-pet/img/aspas.png" alt="" aria-hidden="true">
+                    <blockquote>
+                        <p>O site da UNIPETS é simples, objetivo e bem organizado, o que facilitou significativamente o
+                            processo de compra. As informações dos produtos são claras. A finalização do pedido foi
+                            eficiente e sem contratempos. Certamente voltarei a utilizar a plataforma para minhas próximas compras.</p>
+                    </blockquote>
+                    <img src="https://filipesep.github.io/loja-pet/img/cliente1.png" alt="Foto do cliente Jorge Campos"
+                        class="user">
+                    <h3>Jorge Campos</h3>
+                    <span>Cliente Satisfeito</span>
+                    <div class="stars" aria-label="Avaliação: 4.5 estrelas">
+                        <img width="20" height="20" src="https://img.icons8.com/ios-filled/50/star--v1.png"
+                            alt="Estrela" />
+                        <img width="20" height="20" src="https://img.icons8.com/ios-filled/50/star--v1.png"
+                            alt="Estrela" />
+                        <img width="20" height="20" src="https://img.icons8.com/ios-filled/50/star--v1.png"
+                            alt="Estrela" />
+                        <img width="20" height="20" src="https://img.icons8.com/ios-filled/50/star--v1.png"
+                            alt="Estrela" />
+                        <img width="20" height="20" src="https://img.icons8.com/ios-glyphs/30/star-half-empty.png"
+                            alt="Meia estrela" />
+                    </div>
+                </article>
+                <article class="box">
+                    <img src="https://filipesep.github.io/loja-pet/img/aspas.png" alt="" aria-hidden="true">
+                    <blockquote>
+                        <p> Gente, amei! O site da UNIPETS é super simples, informativo e muito bem organizado. Sério,
+                            facilitou demais a vida na hora de fazer as compras. A finalização do pedido foi rapidinha, sem estresse nem
+                            complicações (e isso vale ouro!). Com certeza vou virar cliente VIP! Excelente experiência!</p>
+                    </blockquote>
+                    <img src="https://filipesep.github.io/loja-pet/img/cliente2.png" alt="Foto da cliente Laura Almeida"
+                        class="user">
+                    <h3>Laura Almeida</h3>
+                    <span>Cliente Satisfeita</span>
+                    <div class="stars" aria-label="Avaliação: 4.5 estrelas">
+                        <img width="20" height="20" src="https://img.icons8.com/ios-filled/50/star--v1.png"
+                            alt="Estrela" />
+                        <img width="20" height="20" src="https://img.icons8.com/ios-filled/50/star--v1.png"
+                            alt="Estrela" />
+                        <img width="20" height="20" src="https://img.icons8.com/ios-filled/50/star--v1.png"
+                            alt="Estrela" />
+                        <img width="20" height="20" src="https://img.icons8.com/ios-filled/50/star--v1.png"
+                            alt="Estrela" />
+                        <img width="20" height="20" src="https://img.icons8.com/ios-glyphs/30/star-half-empty.png"
+                            alt="Meia estrela" />
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer" id="contact" role="contentinfo">
+        <div class="footer-content">
+            <div class="contact-info">
+                <h3>Contato</h3>
+                <p>Email: contato@unipets.com.br</p>
+                <p>Telefone: (11) 1234-5678</p>
+            </div>
+
+            <div class="social-media">
+                <h3>Siga-nos</h3>
+                <div class="share">
+                    <a href="https://www.instagram.com/unipets.oficial" aria-label="Instagram"
+                        target="_blank" rel="noopener noreferrer">
+                        <img width="50" height="50" src="https://img.icons8.com/color/48/instagram-new--v1.png"
+                            alt="Instagram" />
+                    </a>
+                    <a href="#" aria-label="Twitter">
+                        <img width="50" height="50" src="https://img.icons8.com/ios-filled/50/twitterx--v1.png"
+                            alt="Twitter" />
+                    </a>
+                    <a href="#" aria-label="WhatsApp">
+                        <img width="50" height="50" src="https://img.icons8.com/office/40/whatsapp--v1.png"
+                            alt="WhatsApp" />
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>&copy; 2025 UNIPETS. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Modal do Carrinho (será criado dinamicamente pelo JS) -->
+    <div id="cart-modal" class="modal cart-modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-cart">&times;</span>
+            <h2>Seu Carrinho</h2>
+            <div id="cart-items"></div>
+            <div class="cart-total">
+                <strong>Total:</strong> R$ <span id="cart-total">0,00</span>
+            </div>
+            <button id="checkout-btn" class="btn-primary">Finalizar Compra</button>
+        </div>
+    </div>
+
+    <!-- Modal de Checkout -->
+    <div id="checkout-modal" class="modal">
+        <div class="modal-content checkout-content">
+            <span class="close">&times;</span>
+            <h2>Finalizar Compra</h2>
+
+            <div class="checkout-steps">
+                <div class="step active" data-step="1">Endereço</div>
+                <div class="step" data-step="2">Frete</div>
+                <div class="step" data-step="3">Pagamento</div>
+                <div class="step" data-step="4">Confirmação</div>
+            </div>
+
+            <!-- Passo 1: Endereço -->
+            <div class="checkout-step" id="step-1">
+                <h3>Informe seu endereço</h3>
+                <form id="address-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="cep">CEP *</label>
+                            <input type="text" id="cep" maxlength="9" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="numero">Número *</label>
+                            <input type="text" id="numero" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="logradouro">Logradouro *</label>
+                        <input type="text" id="logradouro" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="complemento">Complemento</label>
+                        <input type="text" id="complemento">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="bairro">Bairro *</label>
+                            <input type="text" id="bairro" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cidade">Cidade *</label>
+                            <input type="text" id="cidade" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="estado">Estado *</label>
+                            <select id="estado" required>
+                                <option value="">Selecione</option>
+                                <option value="AC">Acre</option>
+                                <option value="AL">Alagoas</option>
+                                <option value="AP">Amapá</option>
+                                <option value="AM">Amazonas</option>
+                                <option value="BA">Bahia</option>
+                                <option value="CE">Ceará</option>
+                                <option value="DF">Distrito Federal</option>
+                                <option value="ES">Espírito Santo</option>
+                                <option value="GO">Goiás</option>
+                                <option value="MA">Maranhão</option>
+                                <option value="MT">Mato Grosso</option>
+                                <option value="MS">Mato Grosso do Sul</option>
+                                <option value="MG">Minas Gerais</option>
+                                <option value="PA">Pará</option>
+                                <option value="PB">Paraíba</option>
+                                <option value="PR">Paraná</option>
+                                <option value="PE">Pernambuco</option>
+                                <option value="PI">Piauí</option>
+                                <option value="RJ">Rio de Janeiro</option>
+                                <option value="RN">Rio Grande do Norte</option>
+                                <option value="RS">Rio Grande do Sul</option>
+                                <option value="RO">Rondônia</option>
+                                <option value="RR">Roraima</option>
+                                <option value="SC">Santa Catarina</option>
+                                <option value="SP">São Paulo</option>
+                                <option value="SE">Sergipe</option>
+                                <option value="TO">Tocantins</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-primary" onclick="nextStep(2)">Continuar</button>
+                </form>
+            </div>
+
+            <!-- Passo 2: Frete -->
+            <div class="checkout-step" id="step-2" style="display: none;">
+                <h3>Escolha a forma de entrega</h3>
+                <div id="shipping-options"></div>
+                <div class="checkout-actions">
+                    <button class="btn-secondary" onclick="prevStep(1)">Voltar</button>
+                    <button class="btn-primary" onclick="nextStep(3)">Continuar</button>
+                </div>
+            </div>
+
+            <!-- Passo 3: Pagamento -->
+            <div class="checkout-step" id="step-3" style="display: none;">
+                <h3>Método de Pagamento</h3>
+                <div class="payment-methods">
+                    <label class="payment-option">
+                        <input type="radio" name="payment" value="credit" checked>
+                        <span>Cartão de Crédito</span>
+                    </label>
+                    <div id="credit-card-fields" style="display: block; margin-top: 20px;">
+                        <h4>Dados do Cartão</h4>
+                        <div class="form-group">
+                            <label>Nome no Cartão</label>
+                            <input type="text" id="card-name" placeholder="Como está no cartão">
+                        </div>
+                        <div class="form-group">
+                            <label>Número do Cartão</label>
+                            <input type="text" id="card-number" maxlength="19" placeholder="0000 0000 0000 0000">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Validade (Mês)</label>
+                                <select id="card-month">
+                                    <option value="">Mês</option>
+                                    <option>01</option><option>02</option><option>03</option><option>04</option>
+                                    <option>05</option><option>06</option><option>07</option><option>08</option>
+                                    <option>09</option><option>10</option><option>11</option><option>12</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Validade (Ano)</label>
+                                <select id="card-year">
+                                    <option value="">Ano</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>CVV</label>
+                            <input type="text" id="card-cvv" maxlength="4" placeholder="123">
+                        </div>
+                    </div>
+                    <label class="payment-option">
+                        <input type="radio" name="payment" value="pix">
+                        <span>PIX</span>
+                    </label>
+                    <label class="payment-option">
+                        <input type="radio" name="payment" value="boleto">
+                        <span>Boleto Bancário</span>
+                    </label>
+                </div>
+
+                <div class="order-summary">
+                    <h4>Resumo do Pedido</h4>
+                    <div class="summary-item">
+                        <span>Subtotal:</span>
+                        <span id="summary-subtotal">R$ 0,00</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Frete:</span>
+                        <span id="summary-frete">R$ 0,00</span>
+                    </div>
+                    <div class="summary-item total">
+                        <span>Total:</span>
+                        <span id="summary-total">R$ 0,00</span>
+                    </div>
+                </div>
+
+                <div class="checkout-actions">
+                    <button class="btn-secondary" onclick="prevStep(2)">Voltar</button>
+                    <button class="btn-primary" onclick="finalizeOrder()">Finalizar Pedido</button>
+                </div>
+            </div>
+
+            <!-- Passo 4: Confirmação -->
+            <div class="checkout-step" id="step-4" style="display: none;">
+                <div class="confirmation">
+                    <div class="success-icon">✓</div>
+                    <h3>Pedido Confirmado!</h3>
+                    <p>Seu pedido foi realizado com sucesso.</p>
+                    <div class="order-details">
+                        <p><strong>Número do pedido:</strong> <span id="order-number">#00001</span></p>
+                        <p><strong>Previsão de entrega:</strong> <span id="delivery-estimate">5 dias úteis</span></p>
+                        <p><strong>Valor total:</strong> <span id="order-total">R$ 0,00</span></p>
+                    </div>
+                    <button class="btn-primary" onclick="closeCheckout()">Continuar Comprando</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
